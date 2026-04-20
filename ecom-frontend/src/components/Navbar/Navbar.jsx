@@ -23,8 +23,8 @@ const Navbar = () => {
       <div className="container navbar-inner">
         {/* Brand */}
         <Link to="/" className="navbar-brand">
-          <span className="brand-icon">🛒</span>
-          <span className="brand-text">ShopVibe</span>
+          <span className="brand-icon">⚡</span>
+          <span className="brand-text">Nexo</span>
         </Link>
 
         {/* Desktop Links */}
@@ -33,6 +33,7 @@ const Navbar = () => {
           <li><Link to="/products" className={isActive('/products')}>Products</Link></li>
           {user && <li><Link to="/orders"   className={isActive('/orders')}>Orders</Link></li>}
           {user && <li><Link to="/wishlist" className={isActive('/wishlist')}>Wishlist</Link></li>}
+          {user?.role === 'EMPLOYEE' && <li><Link to="/staff" className={`admin-link ${isActive('/staff')}`}>Staff Portal</Link></li>}
           {isAdmin() && <li><Link to="/admin" className={`admin-link ${isActive('/admin')}`}>Admin</Link></li>}
         </ul>
 

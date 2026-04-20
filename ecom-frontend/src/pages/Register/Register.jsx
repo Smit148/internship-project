@@ -40,7 +40,7 @@ const Register = () => {
       <div className="auth-card card">
         <div className="auth-header">
           <h1 className="auth-title">Create Account 🚀</h1>
-          <p className="auth-sub">Join ShopVibe and start shopping</p>
+          <p className="auth-sub">Join Nexo and start shopping</p>
         </div>
 
         {error && <div className="auth-error">⚠️ {error}</div>}

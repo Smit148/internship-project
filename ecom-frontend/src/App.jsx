@@ -12,6 +12,7 @@ import Checkout from './pages/Checkout/Checkout';
 import Orders from './pages/Orders/Orders';
 import Wishlist from './pages/Wishlist/Wishlist';
 import AdminDashboard from './pages/Admin/AdminDashboard';
+import StaffPortal from './pages/Staff/StaffPortal';
 import { useAuth } from './context/AuthContext';
 import './App.css';
 
@@ -38,6 +39,7 @@ function App() {
             <Route path="/checkout" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
             <Route path="/orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
             <Route path="/wishlist" element={<ProtectedRoute><Wishlist /></ProtectedRoute>} />
+            <Route path="/staff" element={<ProtectedRoute><StaffPortal /></ProtectedRoute>} />
             
             {/* Admin routes are protected inside the component */}
             <Route path="/admin/*" element={<AdminDashboard />} />

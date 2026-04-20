@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { Navigate } from 'react-router-dom';
 import CategoryManager from './CategoryManager/CategoryManager';
+import ProductManager from './ProductManager/ProductManager';
+import OrderManager from './OrderManager/OrderManager';
+import AttendanceManager from './AttendanceManager/AttendanceManager';
 import './Admin.css';
 
 const AdminDashboard = () => {
@@ -15,8 +18,9 @@ const AdminDashboard = () => {
   const renderContent = () => {
     switch (activeTab) {
       case 'categories': return <CategoryManager />;
-      case 'products': return <div className="admin-placeholder"><h3>Product Management</h3><p>Manage inventory, add new products to categories. (To be implemented)</p></div>;
-      case 'orders': return <div className="admin-placeholder"><h3>Order Management</h3><p>View user orders and update shipping statuses. (To be implemented)</p></div>;
+      case 'products': return <ProductManager />;
+      case 'orders': return <OrderManager />;
+      case 'hr': return <AttendanceManager />;
       default:
         return (
           <div className="admin-overview">
@@ -51,6 +55,7 @@ const AdminDashboard = () => {
         <div className="admin-brand">Admin Panel</div>
         <ul className="admin-nav">
           <li><button className={activeTab === 'dashboard' ? 'active' : ''} onClick={() => setActiveTab('dashboard')}>📊 Dashboard</button></li>
+          <li><button className={activeTab === 'hr' ? 'active' : ''} onClick={() => setActiveTab('hr')}>👔 Employee HR</button></li>
           <li><button className={activeTab === 'categories' ? 'active' : ''} onClick={() => setActiveTab('categories')}>📂 Categories</button></li>
           <li><button className={activeTab === 'products' ? 'active' : ''} onClick={() => setActiveTab('products')}>🏷️ Products</button></li>
           <li><button className={activeTab === 'orders' ? 'active' : ''} onClick={() => setActiveTab('orders')}>📦 Orders</button></li>

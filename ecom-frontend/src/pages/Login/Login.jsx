@@ -34,14 +34,19 @@ const Login = () => {
     }
   };
 
-  /* Demo login fallback (for testing without backend) */
   const demoLogin = (role) => {
-    const demoUser = role === 'admin'
-      ? { user_id: 0, name: 'Admin User', email: 'admin@demo.com', role: 'ADMIN' }
-      : { user_id: 99, name: 'Demo User', email: 'user@demo.com', role: 'USER' };
+    let demoUser;
+    if (role === 'admin') {
+      demoUser = { user_id: 0, name: 'Admin User', email: 'admin@demo.com', role: 'ADMIN' };
+    } else if (role === 'employee') {
+      demoUser = { user_id: 50, name: 'Employee Staff', email: 'staff@demo.com', role: 'EMPLOYEE' };
+    } else {
+      demoUser = { user_id: 99, name: 'Demo User', email: 'user@demo.com', role: 'USER' };
+    }
+    
     login(demoUser, 'demo-token');
     showToast(`Logged in as ${role} (demo mode)`, 'success');
-    navigate(role === 'admin' ? '/admin' : '/');
+    navigate(role === 'admin' ? '/admin' : role === 'employee' ? '/staff' : '/');
   };
 
   return (
@@ -49,7 +54,7 @@ const Login = () => {
       <div className="auth-card card">
         <div className="auth-header">
           <h1 className="auth-title">Welcome Back 👋</h1>
-          <p className="auth-sub">Sign in to your ShopVibe account</p>
+          <p className="auth-sub">Sign in to your Nexo account</p>
         </div>
 
         {error && <div className="auth-error">⚠️ {error}</div>}
@@ -88,8 +93,9 @@ const Login = () => {
 
         <div className="auth-divider"><span>or try demo</span></div>
         <div className="demo-btns">
-          <button className="btn btn-ghost btn-sm" onClick={() => demoLogin('user')}  id="demo-user-btn">Demo User</button>
-          <button className="btn btn-ghost btn-sm" onClick={() => demoLogin('admin')} id="demo-admin-btn">Demo Admin</button>
+          <button className="btn btn-ghost btn-sm" onClick={() => demoLogin('user')}  id="demo-user-btn">User</button>
+          <button className="btn btn-ghost btn-sm" onClick={() => demoLogin('employee')} id="demo-employee-btn">Employee</button>
+          <button className="btn btn-ghost btn-sm" onClick={() => demoLogin('admin')} id="demo-admin-btn">Admin</button>
         </div>
 
         <p className="auth-footer">

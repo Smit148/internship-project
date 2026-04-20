@@ -6,7 +6,7 @@ const Footer = () => (
   <footer className="footer">
     <div className="container footer-inner">
       <div className="footer-brand">
-        <span className="footer-logo">🛒 ShopVibe</span>
+        <span className="footer-logo">⚡ Nexo</span>
         <p>Your premium e-commerce destination for everything you need.</p>
       </div>
       <div className="footer-links">
@@ -29,7 +29,7 @@ const Footer = () => (
       </div>
     </div>
     <div className="footer-bottom">
-      <p>© {new Date().getFullYear()} ShopVibe. All rights reserved.</p>
+      <p>© {new Date().getFullYear()} Nexo. All rights reserved.</p>
     </div>
   </footer>
 );

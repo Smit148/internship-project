@@ -139,7 +139,7 @@ const Checkout = () => {
           <div className="order-success card">
             <div className="success-icon">🎉</div>
             <h2>Order Placed Successfully!</h2>
-            <p>Thank you for shopping with ShopVibe. Your order has been confirmed.</p>
+            <p>Thank you for shopping with Nexo. Your order has been confirmed.</p>
             <p>Payment Method: <strong>{payment}</strong></p>
             <p>Amount Paid: <strong>₹{grandTotal.toLocaleString('en-IN')}</strong></p>
             <div className="success-actions">
