@@ -4,9 +4,12 @@ import { Navigate } from 'react-router-dom';
 import { useToast } from '../../components/Toast/ToastProvider';
 import { recordAttendance, getMyAttendance, applyForLeave, getMyLeaves } from '../../services/hrService';
 import Loader from '../../components/Loader/Loader';
+import CategoryManager from './CategoryManager/CategoryManager';
+import ProductManager from './ProductManager/ProductManager';
+import OrderManager from './OrderManager/OrderManager';
 
 const StaffPortal = () => {
-  const { user } = useAuth();
+  const { user, isStaff } = useAuth();
   const { showToast } = useToast();
   
   const [activeTab, setActiveTab] = useState('attendance');
@@ -63,7 +66,7 @@ const StaffPortal = () => {
     }
   };
 
-  if (!user || user.role !== 'EMPLOYEE') {
+  if (!user || (!isStaff() && user.role !== 'EMPLOYEE' && user.role !== 'STAFF')) {
     return <Navigate to="/" />;
   }
 
@@ -89,8 +92,26 @@ const StaffPortal = () => {
             <li>
               <button 
                 onClick={() => setActiveTab('leaves')}
-                style={{ width: '100%', padding: '0.8rem 1rem', background: activeTab === 'leaves' ? 'var(--primary)' : 'transparent', color: activeTab === 'leaves' ? '#fff' : 'inherit', border: 'none', borderRadius: 'var(--radius)', textAlign: 'left', cursor: 'pointer' }}
+                style={{ width: '100%', padding: '0.8rem 1rem', background: activeTab === 'leaves' ? 'var(--primary)' : 'transparent', color: activeTab === 'leaves' ? '#fff' : 'inherit', border: 'none', borderRadius: 'var(--radius)', textAlign: 'left', cursor: 'pointer', marginBottom: '0.2rem' }}
               >📅 Leave Portal</button>
+            </li>
+            <li>
+              <button 
+                onClick={() => setActiveTab('categories')}
+                style={{ width: '100%', padding: '0.8rem 1rem', background: activeTab === 'categories' ? 'var(--primary)' : 'transparent', color: activeTab === 'categories' ? '#fff' : 'inherit', border: 'none', borderRadius: 'var(--radius)', textAlign: 'left', cursor: 'pointer', marginBottom: '0.2rem' }}
+              >📂 Categories</button>
+            </li>
+            <li>
+              <button 
+                onClick={() => setActiveTab('products')}
+                style={{ width: '100%', padding: '0.8rem 1rem', background: activeTab === 'products' ? 'var(--primary)' : 'transparent', color: activeTab === 'products' ? '#fff' : 'inherit', border: 'none', borderRadius: 'var(--radius)', textAlign: 'left', cursor: 'pointer', marginBottom: '0.2rem' }}
+              >🏷️ Products</button>
+            </li>
+            <li>
+              <button 
+                onClick={() => setActiveTab('orders')}
+                style={{ width: '100%', padding: '0.8rem 1rem', background: activeTab === 'orders' ? 'var(--primary)' : 'transparent', color: activeTab === 'orders' ? '#fff' : 'inherit', border: 'none', borderRadius: 'var(--radius)', textAlign: 'left', cursor: 'pointer' }}
+              >📦 Orders</button>
             </li>
           </ul>
         </div>
@@ -203,6 +224,10 @@ const StaffPortal = () => {
               </table>
             </div>
           )}
+
+          {activeTab === 'categories' && <CategoryManager />}
+          {activeTab === 'products' && <ProductManager />}
+          {activeTab === 'orders' && <OrderManager />}
         </div>
 
       </div>

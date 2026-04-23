@@ -17,7 +17,12 @@ axiosInstance.interceptors.request.use(
 
 // Handle 401 globally
 axiosInstance.interceptors.response.use(
-  (res) => res,
+  (res) => {
+    if (typeof res.data === 'string' && res.data.toLowerCase().includes('<!doctype html>')) {
+      return Promise.reject(new Error("Vite SPA Fallback HTML returned. API endpoint not found."));
+    }
+    return res;
+  },
   (error) => {
     if (error.response?.status === 401) {
       localStorage.removeItem('token');

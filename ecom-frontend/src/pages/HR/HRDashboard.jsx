@@ -1,26 +1,22 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { Navigate } from 'react-router-dom';
-import CategoryManager from './CategoryManager/CategoryManager';
-import ProductManager from './ProductManager/ProductManager';
-import OrderManager from './OrderManager/OrderManager';
 import AttendanceManager from './AttendanceManager/AttendanceManager';
-import './Admin.css';
+import EmployeeManager from './EmployeeManager/EmployeeManager';
+import './HR.css';
 
-const AdminDashboard = () => {
-  const { user, isAdmin } = useAuth();
+const HRDashboard = () => {
+  const { user, isHR } = useAuth();
   const [activeTab, setActiveTab] = useState('dashboard');
 
-  if (!user || (!isAdmin() && user.role !== 'admin' && user.role !== 'ADMIN')) {
+  if (!user || (!isHR() && user.role !== 'hr' && user.role !== 'HR')) {
     return <Navigate to="/" />;
   }
 
   const renderContent = () => {
     switch (activeTab) {
-      case 'categories': return <CategoryManager />;
-      case 'products': return <ProductManager />;
-      case 'orders': return <OrderManager />;
-      case 'hr': return <AttendanceManager />;
+      case 'employees': return <EmployeeManager />;
+      case 'attendance': return <AttendanceManager />;
       default:
         return (
           <div className="admin-overview">
@@ -52,13 +48,11 @@ const AdminDashboard = () => {
   return (
     <div className="admin-page">
       <div className="admin-sidebar">
-        <div className="admin-brand">Admin Panel</div>
+        <div className="admin-brand">HR Panel</div>
         <ul className="admin-nav">
           <li><button className={activeTab === 'dashboard' ? 'active' : ''} onClick={() => setActiveTab('dashboard')}>📊 Dashboard</button></li>
-          <li><button className={activeTab === 'hr' ? 'active' : ''} onClick={() => setActiveTab('hr')}>👔 Employee HR</button></li>
-          <li><button className={activeTab === 'categories' ? 'active' : ''} onClick={() => setActiveTab('categories')}>📂 Categories</button></li>
-          <li><button className={activeTab === 'products' ? 'active' : ''} onClick={() => setActiveTab('products')}>🏷️ Products</button></li>
-          <li><button className={activeTab === 'orders' ? 'active' : ''} onClick={() => setActiveTab('orders')}>📦 Orders</button></li>
+          <li><button className={activeTab === 'employees' ? 'active' : ''} onClick={() => setActiveTab('employees')}>👥 Employees</button></li>
+          <li><button className={activeTab === 'attendance' ? 'active' : ''} onClick={() => setActiveTab('attendance')}>📅 Leaves & Attendance</button></li>
         </ul>
       </div>
       <div className="admin-content">
@@ -68,4 +62,4 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard;
+export default HRDashboard;

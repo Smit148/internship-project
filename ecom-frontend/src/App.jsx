@@ -11,7 +11,7 @@ import Cart from './pages/Cart/Cart';
 import Checkout from './pages/Checkout/Checkout';
 import Orders from './pages/Orders/Orders';
 import Wishlist from './pages/Wishlist/Wishlist';
-import AdminDashboard from './pages/Admin/AdminDashboard';
+import HRDashboard from './pages/HR/HRDashboard';
 import StaffPortal from './pages/Staff/StaffPortal';
 import { useAuth } from './context/AuthContext';
 import './App.css';
@@ -41,8 +41,7 @@ function App() {
             <Route path="/wishlist" element={<ProtectedRoute><Wishlist /></ProtectedRoute>} />
             <Route path="/staff" element={<ProtectedRoute><StaffPortal /></ProtectedRoute>} />
             
-            {/* Admin routes are protected inside the component */}
-            <Route path="/admin/*" element={<AdminDashboard />} />
+            <Route path="/hr/*" element={<HRDashboard />} />
             
             <Route path="*" element={<div className="container empty-state"><h3>404 - Page Not Found</h3></div>} />
           </Routes>

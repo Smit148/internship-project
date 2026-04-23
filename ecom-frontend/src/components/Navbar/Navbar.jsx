@@ -5,7 +5,7 @@ import { useCart } from '../../context/CartContext';
 import './Navbar.css';
 
 const Navbar = () => {
-  const { user, logout, isAdmin } = useAuth();
+  const { user, logout, isHR, isStaff } = useAuth();
   const { cartCount } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
@@ -33,8 +33,8 @@ const Navbar = () => {
           <li><Link to="/products" className={isActive('/products')}>Products</Link></li>
           {user && <li><Link to="/orders"   className={isActive('/orders')}>Orders</Link></li>}
           {user && <li><Link to="/wishlist" className={isActive('/wishlist')}>Wishlist</Link></li>}
-          {user?.role === 'EMPLOYEE' && <li><Link to="/staff" className={`admin-link ${isActive('/staff')}`}>Staff Portal</Link></li>}
-          {isAdmin() && <li><Link to="/admin" className={`admin-link ${isActive('/admin')}`}>Admin</Link></li>}
+          {isStaff() && <li><Link to="/staff" className={`admin-link ${isActive('/staff')}`}>Staff Portal</Link></li>}
+          {isHR() && <li><Link to="/hr" className={`admin-link ${isActive('/hr')}`}>HR Portal</Link></li>}
         </ul>
 
         {/* Actions */}
@@ -74,7 +74,8 @@ const Navbar = () => {
         <Link to="/cart"     onClick={() => setMenuOpen(false)}>Cart {cartCount > 0 && `(${cartCount})`}</Link>
         {user && <Link to="/orders"   onClick={() => setMenuOpen(false)}>Orders</Link>}
         {user && <Link to="/wishlist" onClick={() => setMenuOpen(false)}>Wishlist</Link>}
-        {isAdmin() && <Link to="/admin" onClick={() => setMenuOpen(false)}>Admin Panel</Link>}
+        {isStaff() && <Link to="/staff" onClick={() => setMenuOpen(false)}>Staff Portal</Link>}
+        {isHR() && <Link to="/hr" onClick={() => setMenuOpen(false)}>HR Panel</Link>}
         {user
           ? <button onClick={handleLogout}>Logout</button>
           : <>
