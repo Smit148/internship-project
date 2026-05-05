@@ -24,7 +24,7 @@ const Login = () => {
       const res = await loginApi(form);
       login(res.data.user, res.data.token);
       showToast('Welcome back! 🎉', 'success');
-      navigate(res.data.user.role === 'ADMIN' ? '/admin' : '/');
+      navigate(res.data.user.role === 'ADMIN' || res.data.user.role === 'HR' ? '/hr' : (res.data.user.role === 'EMPLOYEE' || res.data.user.role === 'STAFF') ? '/staff' : '/');
     } catch (err) {
       const msg = err.response?.data?.message || 'Invalid email or password.';
       setError(msg);
@@ -46,7 +46,7 @@ const Login = () => {
     
     login(demoUser, 'demo-token');
     showToast(`Logged in as ${role} (demo mode)`, 'success');
-    navigate(role === 'admin' ? '/admin' : role === 'employee' ? '/staff' : '/');
+    navigate(role === 'admin' ? '/hr' : role === 'employee' ? '/staff' : '/');
   };
 
   return (

@@ -4,16 +4,14 @@ import { useAuth } from './AuthContext';
 const CartContext = createContext(null);
 
 export const CartProvider = ({ children }) => {
-  const { token } = useAuth();
+  const { user } = useAuth();
+  const cartKey = `cart_${user?.email || 'guest'}`;
   const [cartItems, setCartItems] = useState([]);
 
-  // Load cart from localStorage when not logged in
   useEffect(() => {
-    if (!token) {
-      const saved = localStorage.getItem('cart');
-      if (saved) setCartItems(JSON.parse(saved));
-    }
-  }, [token]);
+    const saved = localStorage.getItem(cartKey);
+    setCartItems(saved ? JSON.parse(saved) : []);
+  }, [cartKey]);
 
   const cartCount = cartItems.reduce((sum, i) => sum + i.quantity, 0);
   const cartTotal = cartItems.reduce((sum, i) => sum + i.price * i.quantity, 0);
@@ -26,7 +24,7 @@ export const CartProvider = ({ children }) => {
             ? { ...i, quantity: i.quantity + qty }
             : i)
         : [...prev, { ...product, quantity: qty }];
-      localStorage.setItem('cart', JSON.stringify(updated));
+      localStorage.setItem(cartKey, JSON.stringify(updated));
       return updated;
     });
   };
@@ -34,7 +32,7 @@ export const CartProvider = ({ children }) => {
   const removeFromCart = (productId) => {
     setCartItems(prev => {
       const updated = prev.filter(i => i.product_id !== productId);
-      localStorage.setItem('cart', JSON.stringify(updated));
+      localStorage.setItem(cartKey, JSON.stringify(updated));
       return updated;
     });
   };
@@ -45,14 +43,14 @@ export const CartProvider = ({ children }) => {
       const updated = prev.map(i =>
         i.product_id === productId ? { ...i, quantity: qty } : i
       );
-      localStorage.setItem('cart', JSON.stringify(updated));
+      localStorage.setItem(cartKey, JSON.stringify(updated));
       return updated;
     });
   };
 
   const clearCart = () => {
     setCartItems([]);
-    localStorage.removeItem('cart');
+    localStorage.removeItem(cartKey);
   };
 
   return (
