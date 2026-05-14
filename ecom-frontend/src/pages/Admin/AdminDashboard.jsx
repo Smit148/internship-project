@@ -5,6 +5,7 @@ import CategoryManager from './CategoryManager/CategoryManager';
 import ProductManager from './ProductManager/ProductManager';
 import OrderManager from './OrderManager/OrderManager';
 import UserManager from './UserManager/UserManager';
+import CustomerManager from './CustomerManager/CustomerManager';
 import './Admin.css';
 
 const AdminDashboard = () => {
@@ -21,6 +22,7 @@ const AdminDashboard = () => {
       case 'products': return <ProductManager />;
       case 'orders': return <OrderManager />;
       case 'users': return <UserManager />;
+      case 'customers': return <CustomerManager />;
       default:
         return (
           <div className="admin-overview">
@@ -55,7 +57,8 @@ const AdminDashboard = () => {
         <div className="admin-brand">Admin Panel</div>
         <ul className="admin-nav">
           <li><button className={activeTab === 'dashboard' ? 'active' : ''} onClick={() => setActiveTab('dashboard')}>📊 Dashboard</button></li>
-          <li><button className={activeTab === 'users' ? 'active' : ''} onClick={() => setActiveTab('users')}>👥 Users</button></li>
+          <li><button className={activeTab === 'users' ? 'active' : ''} onClick={() => setActiveTab('users')}>🧑‍💼 Employees</button></li>
+          <li><button className={activeTab === 'customers' ? 'active' : ''} onClick={() => setActiveTab('customers')}>👥 Customers</button></li>
           <li><button className={activeTab === 'categories' ? 'active' : ''} onClick={() => setActiveTab('categories')}>📂 Categories</button></li>
           <li><button className={activeTab === 'products' ? 'active' : ''} onClick={() => setActiveTab('products')}>🏷️ Products</button></li>
           <li><button className={activeTab === 'orders' ? 'active' : ''} onClick={() => setActiveTab('orders')}>📦 Orders</button></li>
