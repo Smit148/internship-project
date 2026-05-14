@@ -1,8 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import './Footer.css';
 
-const Footer = () => (
+const Footer = () => {
+  const { user } = useAuth();
+  
+  return (
   <footer className="footer">
     <div className="container footer-inner">
       <div className="footer-brand">
@@ -17,9 +21,13 @@ const Footer = () => (
       </div>
       <div className="footer-links">
         <h4>Account</h4>
-        <Link to="/login">Login</Link>
-        <Link to="/register">Register</Link>
-        <Link to="/orders">My Orders</Link>
+        {!user && (
+          <>
+            <Link to="/login">Login</Link>
+            <Link to="/register">Register</Link>
+          </>
+        )}
+        {user && <Link to="/orders">My Orders</Link>}
       </div>
       <div className="footer-links">
         <h4>Support</h4>
@@ -32,6 +40,7 @@ const Footer = () => (
       <p>© {new Date().getFullYear()} Nexo. All rights reserved.</p>
     </div>
   </footer>
-);
+  );
+};
 
 export default Footer;

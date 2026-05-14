@@ -11,6 +11,7 @@ import Cart from './pages/Cart/Cart';
 import Checkout from './pages/Checkout/Checkout';
 import Orders from './pages/Orders/Orders';
 import Wishlist from './pages/Wishlist/Wishlist';
+import AdminDashboard from './pages/Admin/AdminDashboard';
 import HRDashboard from './pages/HR/HRDashboard';
 import StaffPortal from './pages/Staff/StaffPortal';
 import { useAuth } from './context/AuthContext';
@@ -19,6 +20,13 @@ import './App.css';
 const ProtectedRoute = ({ children }) => {
   const { user } = useAuth();
   if (!user) return <Navigate to="/login" />;
+  return children;
+};
+
+const AdminRoute = ({ children }) => {
+  const { user, isAdmin } = useAuth();
+  if (!user) return <Navigate to="/login" />;
+  if (!isAdmin()) return <Navigate to="/" />;
   return children;
 };
 
@@ -37,12 +45,13 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             
             <Route path="/checkout" element={<ProtectedRoute><Checkout /></ProtectedRoute>} />
-            <Route path="/orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
+            <Route path="/orders"   element={<ProtectedRoute><Orders /></ProtectedRoute>} />
             <Route path="/wishlist" element={<ProtectedRoute><Wishlist /></ProtectedRoute>} />
-            <Route path="/staff" element={<ProtectedRoute><StaffPortal /></ProtectedRoute>} />
-            
-            <Route path="/hr/*" element={<HRDashboard />} />
-            
+            <Route path="/staff"    element={<ProtectedRoute><StaffPortal /></ProtectedRoute>} />
+
+            <Route path="/admin/*" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
+            <Route path="/hr/*"    element={<HRDashboard />} />
+
             <Route path="*" element={<div className="container empty-state"><h3>404 - Page Not Found</h3></div>} />
           </Routes>
         </main>

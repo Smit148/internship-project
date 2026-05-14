@@ -82,7 +82,7 @@ const CategoryManager = () => {
         showToast('Category updated', 'success');
       }
       closeModal();
-    } catch (err) {
+    } catch {
       // Demo mode success
       if (modalMode === 'add') {
         setCategories([...categories, { category_id: Date.now(), ...form, status: true, product_count: 0 }]);

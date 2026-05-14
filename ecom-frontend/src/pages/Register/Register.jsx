@@ -1,16 +1,25 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { register as registerApi } from '../../services/authService';
+import { useAuth } from '../../context/AuthContext';
 import { useToast } from '../../components/Toast/ToastProvider';
 import '../Login/Auth.css';
 
 const Register = () => {
   const { showToast } = useToast();
+  const { user } = useAuth();
   const navigate = useNavigate();
 
   const [form, setForm]       = useState({ name: '', email: '', password: '', confirm: '' });
   const [loading, setLoading] = useState(false);
   const [error, setError]     = useState('');
+
+  // Redirect if already logged in
+  React.useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user, navigate]);
 
   const handleChange = e => setForm({ ...form, [e.target.name]: e.target.value });
 

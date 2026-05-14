@@ -25,11 +25,12 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('token');
   };
 
-  const isHR = () => user?.role === 'HR' || user?.role === 'ADMIN';
+  const isAdmin = () => user?.role === 'ADMIN' || user?.role === 'admin';
+  const isHR    = () => user?.role === 'HR'    || user?.role === 'ADMIN';
   const isStaff = () => user?.role === 'EMPLOYEE' || user?.role === 'STAFF';
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout, isHR, isStaff }}>
+    <AuthContext.Provider value={{ user, token, login, logout, isAdmin, isHR, isStaff }}>
       {children}
     </AuthContext.Provider>
   );

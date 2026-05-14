@@ -127,3 +127,100 @@
   .am-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
   .am-table-wrap { margin-top: 1rem; }
 }
+
+/* ===== PRODUCT MANAGER SPECIFICS ===== */
+
+/* Stats summary pills */
+.pm-stats-row {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+.pm-stat-pill {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 110px;
+  gap: 0.2rem;
+}
+.pm-stat-num  { font-size: 1.5rem; font-weight: 800; line-height: 1.2; }
+.pm-stat-lbl  { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; }
+
+/* SKU code chip */
+.pm-sku {
+  background: var(--bg-card2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.15rem 0.5rem;
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  color: var(--primary);
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+/* Description preview in table */
+.pm-desc-preview {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 0.2rem;
+  max-width: 240px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Status toggle row in form */
+.pm-status-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1rem;
+  background: var(--bg-card2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-top: 0.5rem;
+}
+.pm-status-toggle input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+.pm-status-toggle label {
+  font-size: 0.9rem;
+  color: var(--text);
+  cursor: pointer;
+  margin: 0;
+}
+
+/* Deactivation warning box */
+.deactivate-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  background: rgba(245,158,11,0.1);
+  border: 1px solid rgba(245,158,11,0.35);
+  border-radius: var(--radius);
+  padding: 1rem 1.1rem;
+  font-size: 0.9rem;
+  color: var(--text);
+  line-height: 1.6;
+}
+.deactivate-warning .dw-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+@media (max-width: 768px) {
+  .pm-stats-row { gap: 0.6rem; }
+  .pm-stat-pill { min-width: 80px; padding: 0.6rem 0.8rem; }
+  .pm-stat-num  { font-size: 1.2rem; }
+  .pm-desc-preview { display: none; }
+}

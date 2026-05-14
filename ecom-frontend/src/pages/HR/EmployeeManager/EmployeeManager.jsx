@@ -12,6 +12,7 @@ const EmployeeManager = () => {
 
   useEffect(() => {
     fetchEmployees();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchEmployees = async () => {
@@ -36,7 +37,7 @@ const EmployeeManager = () => {
       showToast('Employee account created successfully!', 'success');
       setForm({ name: '', email: '', password: '', role: 'EMPLOYEE', department: '' });
       fetchEmployees();
-    } catch (e) {
+    } catch {
       showToast('Failed to create employee', 'error');
     }
   };

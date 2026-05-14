@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useToast } from '../../../components/Toast/ToastProvider';
 import Loader from '../../../components/Loader/Loader';
-import { getAllProducts, createProduct, updateProduct, deleteProduct } from '../../../services/productService';
+import { getAllProducts } from '../../../services/productService';
 import { getAllCategories } from '../../../services/categoryService';
 
 const MOCK_PRODS = [

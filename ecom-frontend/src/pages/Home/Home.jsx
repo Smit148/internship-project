@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import { getAllProducts } from '../../services/productService';
 import { getAllCategories } from '../../services/categoryService';
 import ProductCard from '../../components/ProductCard/ProductCard';
@@ -30,6 +31,7 @@ const MOCK_CATEGORIES = [
 const CATEGORY_ICONS = { Electronics: '💻', Footwear: '👟', Bags: '👜', Accessories: '⌚', Sports: '🏃', Kitchen: '☕', General: '📦' };
 
 const Home = () => {
+  const { user } = useAuth();
   const [products, setProducts]     = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading]       = useState(true);
@@ -62,7 +64,7 @@ const Home = () => {
             <p className="hero-sub">Discover thousands of premium products at unbeatable prices. Fast delivery, easy returns.</p>
             <div className="hero-actions">
               <Link to="/products" className="btn btn-primary btn-lg" id="hero-shop-btn">Shop Now →</Link>
-              <Link to="/register" className="btn btn-outline btn-lg" id="hero-join-btn">Join Free</Link>
+              {!user && <Link to="/register" className="btn btn-outline btn-lg" id="hero-join-btn">Join Free</Link>}
             </div>
           </div>
           <div className="hero-visual" aria-hidden="true">
@@ -141,12 +143,27 @@ const Home = () => {
       <section className="cta-banner">
         <div className="container cta-inner">
           <div>
-            <h2>Ready to start shopping?</h2>
-            <p>Join thousands of happy customers today.</p>
+            {user ? (
+              <>
+                <h2>Welcome back, {user.name ? user.name.split(' ')[0] : 'User'}!</h2>
+                <p>Continue exploring our premium products.</p>
+              </>
+            ) : (
+              <>
+                <h2>Ready to start shopping?</h2>
+                <p>Join thousands of happy customers today.</p>
+              </>
+            )}
           </div>
-          <Link to="/register" className="btn btn-primary btn-lg" id="cta-register-btn">
-            Get Started Free →
-          </Link>
+          {user ? (
+            <Link to="/products" className="btn btn-primary btn-lg" id="cta-shop-btn">
+              Continue Shopping →
+            </Link>
+          ) : (
+            <Link to="/register" className="btn btn-primary btn-lg" id="cta-register-btn">
+              Get Started Free →
+            </Link>
+          )}
         </div>
       </section>
     </div>

@@ -22,7 +22,7 @@ const ProductDetail = () => {
       try {
         const res = await getProductById(id);
         setProduct(res.data);
-      } catch (err) {
+      } catch {
         // Fallback demo data
         setProduct({
           product_id: Number(id),
