@@ -10,6 +10,8 @@ import PaymentManager from './PaymentManager/PaymentManager';
 import CartManager from './CartManager/CartManager';
 import WishlistManager from './WishlistManager/WishlistManager';
 import ShippingManager from './ShippingManager/ShippingManager';
+import ReviewManager from './ReviewManager/ReviewManager';
+import CouponManager from './CouponManager/CouponManager';
 import './Admin.css';
 
 const AdminDashboard = () => {
@@ -31,6 +33,8 @@ const AdminDashboard = () => {
       case 'carts': return <CartManager />;
       case 'wishlists': return <WishlistManager />;
       case 'shipping': return <ShippingManager />;
+      case 'reviews': return <ReviewManager />;
+      case 'coupons': return <CouponManager />;
       default:
         return (
           <div className="admin-overview">
@@ -74,6 +78,8 @@ const AdminDashboard = () => {
           <li><button className={activeTab === 'carts' ? 'active' : ''} onClick={() => setActiveTab('carts')}>🛒 Carts</button></li>
           <li><button className={activeTab === 'wishlists' ? 'active' : ''} onClick={() => setActiveTab('wishlists')}>❤️ Wishlists</button></li>
           <li><button className={activeTab === 'shipping' ? 'active' : ''} onClick={() => setActiveTab('shipping')}>🚚 Shipping</button></li>
+          <li><button className={activeTab === 'reviews' ? 'active' : ''} onClick={() => setActiveTab('reviews')}>⭐ Reviews</button></li>
+          <li><button className={activeTab === 'coupons' ? 'active' : ''} onClick={() => setActiveTab('coupons')}>🎟️ Coupons</button></li>
         </ul>
       </div>
       <div className="admin-content">

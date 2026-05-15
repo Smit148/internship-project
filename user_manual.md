@@ -100,3 +100,13 @@ The platform includes several core management modules accessible to administrato
 - **Dashboard**: Track all shipments across the platform.
 - **Cost Calculation**: View shipping costs applied to orders.
 - **Tracking Updates**: Admins can update courier services, tracking numbers, and delivery statuses (Pending, Shipped, In Transit, Delivered) for any order.
+
+### Review and Rating Management Module
+- **Customer Reviews**: Customers can view, submit, edit, and delete 1-5 star ratings and text reviews directly on product pages.
+- **Moderation Dashboard**: Admins can view all submitted reviews.
+- **Content Control**: Admins can permanently delete inappropriate reviews or approve/reject reviews to ensure adherence to community guidelines.
+
+### Coupon and Discount Management Module
+- **Discount Types**: Admins can create promotional codes that apply either a flat-rate amount or a percentage discount to the cart total.
+- **Control and Limits**: Admins can specify valid start/end dates and restrict the total number of times a coupon can be used.
+- **Customer Checkout**: Customers can easily input their coupon codes during the checkout flow. Valid discounts are instantly applied to the order subtotal.

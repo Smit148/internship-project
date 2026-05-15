@@ -17,9 +17,23 @@ const Checkout = () => {
     fullName: '', phone: '', street: '', city: '', state: '', pincode: ''
   });
   const [payment, setPayment] = useState('COD');
+  
+  const [couponCode, setCouponCode] = useState('');
+  const [appliedCoupon, setAppliedCoupon] = useState(null);
 
   const shipping   = cartTotal > 1000 ? 0 : 99;
-  const grandTotal = cartTotal + shipping;
+  
+  // Calculate discount
+  let discountAmount = 0;
+  if (appliedCoupon) {
+    if (appliedCoupon.type === 'Percentage') {
+      discountAmount = (cartTotal * appliedCoupon.value) / 100;
+    } else {
+      discountAmount = appliedCoupon.value;
+    }
+  }
+  
+  const grandTotal = cartTotal + shipping - discountAmount;
 
   const handleAddressChange = e => setAddress({ ...address, [e.target.name]: e.target.value });
 
@@ -40,6 +54,22 @@ const Checkout = () => {
     setStep(3);
     showToast('Order placed successfully! 🎉', 'success');
     setLoading(false);
+  };
+
+  const handleApplyCoupon = () => {
+    if (!couponCode) return;
+    
+    // Mock coupon validation
+    if (couponCode.toUpperCase() === 'WELCOME10') {
+      setAppliedCoupon({ code: 'WELCOME10', type: 'Percentage', value: 10 });
+      showToast('Coupon applied! 10% OFF', 'success');
+    } else if (couponCode.toUpperCase() === 'FLAT500') {
+      setAppliedCoupon({ code: 'FLAT500', type: 'Fixed', value: 500 });
+      showToast('Coupon applied! ₹500 OFF', 'success');
+    } else {
+      showToast('Invalid or expired coupon', 'error');
+      setAppliedCoupon(null);
+    }
   };
 
   if (cartItems.length === 0 && step !== 3) {
@@ -100,7 +130,9 @@ const Checkout = () => {
                 Continue to Payment →
               </button>
             </div>
-            <OrderSummaryPanel items={cartItems} total={cartTotal} shipping={shipping} grand={grandTotal} />
+            <OrderSummaryPanel items={cartItems} total={cartTotal} shipping={shipping} grand={grandTotal} 
+              discount={discountAmount} appliedCoupon={appliedCoupon} 
+              couponCode={couponCode} setCouponCode={setCouponCode} handleApplyCoupon={handleApplyCoupon} />
           </div>
         )}
 
@@ -130,7 +162,9 @@ const Checkout = () => {
                 </button>
               </div>
             </div>
-            <OrderSummaryPanel items={cartItems} total={cartTotal} shipping={shipping} grand={grandTotal} />
+            <OrderSummaryPanel items={cartItems} total={cartTotal} shipping={shipping} grand={grandTotal} 
+              discount={discountAmount} appliedCoupon={appliedCoupon} 
+              couponCode={couponCode} setCouponCode={setCouponCode} handleApplyCoupon={handleApplyCoupon} />
           </div>
         )}
 
@@ -153,7 +187,7 @@ const Checkout = () => {
   );
 };
 
-const OrderSummaryPanel = ({ items, total, shipping, grand }) => (
+const OrderSummaryPanel = ({ items, total, shipping, grand, discount, appliedCoupon, couponCode, setCouponCode, handleApplyCoupon }) => (
   <div className="checkout-summary card">
     <h3 className="summary-title">Order Summary</h3>
     <div className="co-items">
@@ -167,8 +201,23 @@ const OrderSummaryPanel = ({ items, total, shipping, grand }) => (
     <div className="summary-divider" />
     <div className="co-item"><span>Subtotal</span><span>₹{total.toLocaleString('en-IN')}</span></div>
     <div className="co-item"><span>Shipping</span><span style={{ color: shipping === 0 ? 'var(--success)' : '' }}>{shipping === 0 ? 'FREE' : `₹${shipping}`}</span></div>
+    
+    {discount > 0 && (
+      <div className="co-item" style={{ color: 'var(--primary)', fontWeight: '600' }}>
+        <span>Discount ({appliedCoupon?.code})</span>
+        <span>- ₹{discount.toLocaleString('en-IN')}</span>
+      </div>
+    )}
+    
     <div className="summary-divider" />
-    <div className="co-item total-row"><strong>Total</strong><strong>₹{grand.toLocaleString('en-IN')}</strong></div>
+    
+    {/* Coupon Section */}
+    <div style={{ marginBottom: '1rem', display: 'flex', gap: '0.5rem' }}>
+      <input type="text" className="form-control" placeholder="Enter Coupon Code" value={couponCode} onChange={(e) => setCouponCode(e.target.value)} style={{ padding: '0.4rem 0.8rem', textTransform: 'uppercase' }} />
+      <button className="btn btn-ghost btn-sm" onClick={handleApplyCoupon} style={{ whiteSpace: 'nowrap', border: '1px solid var(--border)' }}>Apply</button>
+    </div>
+
+    <div className="co-item total-row"><strong>Total</strong><strong>₹{Math.max(0, grand).toLocaleString('en-IN')}</strong></div>
   </div>
 );
 

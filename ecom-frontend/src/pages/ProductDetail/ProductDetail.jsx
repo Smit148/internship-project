@@ -103,6 +103,49 @@ const ProductDetail = () => {
             </div>
           </div>
         </div>
+
+        {/* ── Reviews Section ────────────────────────────────────────── */}
+        <div className="pd-reviews-section card" style={{ marginTop: '2rem', padding: '2rem' }}>
+          <h2 style={{ marginBottom: '1.5rem' }}>Customer Reviews & Ratings</h2>
+          
+          {/* Add Review Form */}
+          <div className="pd-add-review" style={{ marginBottom: '2rem', padding: '1.5rem', background: 'var(--bg-color)', borderRadius: '8px' }}>
+            <h3 style={{ marginBottom: '1rem', fontSize: '1.1rem' }}>Write a Review</h3>
+            <form onSubmit={(e) => { e.preventDefault(); alert('Review submitted for moderation!'); }}>
+              <div className="form-group">
+                <label className="form-label">Rating (1-5)</label>
+                <select className="form-control" style={{ maxWidth: '150px' }} required>
+                  <option value="5">⭐⭐⭐⭐⭐ (5/5)</option>
+                  <option value="4">⭐⭐⭐⭐☆ (4/5)</option>
+                  <option value="3">⭐⭐⭐☆☆ (3/5)</option>
+                  <option value="2">⭐⭐☆☆☆ (2/5)</option>
+                  <option value="1">⭐☆☆☆☆ (1/5)</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <label className="form-label">Your Review</label>
+                <textarea className="form-control" rows="3" placeholder="What did you like or dislike about this product?" required></textarea>
+              </div>
+              <button type="submit" className="btn btn-primary btn-sm">Submit Review</button>
+            </form>
+          </div>
+
+          {/* Review List */}
+          <div className="pd-review-list">
+            <div className="pd-review-item" style={{ borderBottom: '1px solid var(--border)', paddingBottom: '1rem', marginBottom: '1rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem' }}>
+                <strong style={{ color: 'var(--text-color)' }}>John Doe</strong>
+                <span style={{ color: 'var(--warning)', letterSpacing: '2px' }}>⭐⭐⭐⭐⭐</span>
+              </div>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem' }}>"Excellent sound quality and very comfortable to wear for long periods!"</p>
+              <div style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
+                <button className="btn btn-ghost btn-sm" style={{ padding: 0, fontSize: '0.85rem' }}>Edit</button>
+                <button className="btn btn-ghost btn-sm" style={{ padding: 0, fontSize: '0.85rem', color: 'var(--danger)' }}>Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   );

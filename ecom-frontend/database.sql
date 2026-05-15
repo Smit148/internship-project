@@ -71,3 +71,31 @@ CREATE TABLE shipping (
     updated_at DATETIME,
     FOREIGN KEY (order_id) REFERENCES orders(user_id)
 );
+
+-- 7. Create reviews table
+CREATE TABLE reviews (
+    review_id INT PRIMARY KEY AUTO_INCREMENT,
+    product_id INT,
+    customer_id INT,
+    rating INT,
+    review_text VARCHAR(1000),
+    created_at DATETIME,
+    updated_at DATETIME,
+    status BOOLEAN,
+    FOREIGN KEY (product_id) REFERENCES products(product_id),
+    FOREIGN KEY (customer_id) REFERENCES users(user_id)
+);
+
+-- 8. Create coupons table
+CREATE TABLE coupons (
+    coupon_id INT PRIMARY KEY AUTO_INCREMENT,
+    coupon_code VARCHAR(50) UNIQUE,
+    discount_type VARCHAR(50),
+    discount_value DECIMAL(10,2),
+    valid_from DATETIME,
+    valid_to DATETIME,
+    usage_limit INT,
+    status BOOLEAN,
+    created_at DATETIME,
+    updated_at DATETIME
+);
