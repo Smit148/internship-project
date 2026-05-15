@@ -36,3 +36,25 @@ CREATE TABLE payments (
     updated_at DATETIME,
     FOREIGN KEY (order_id) REFERENCES orders(user_id)
 );
+
+-- 4. Create carts table
+CREATE TABLE carts (
+    cart_id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_id INT,
+    product_id INT,
+    quantity INT,
+    total_price DECIMAL(10,2),
+    created_at DATETIME,
+    updated_at DATETIME,
+    FOREIGN KEY (customer_id) REFERENCES users(user_id)
+);
+
+-- 5. Create wishlists table
+CREATE TABLE wishlists (
+    wishlist_id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_id INT,
+    product_id INT,
+    created_at DATETIME,
+    updated_at DATETIME,
+    FOREIGN KEY (customer_id) REFERENCES users(user_id)
+);
