@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useToast } from '../../../components/Toast/ToastProvider';
 import Loader from '../../../components/Loader/Loader';
-import { getAllOrders, updateOrderStatus } from '../../../services/orderService';
+import { getAllOrders } from '../../../services/orderService';
 
 const MOCK_ORDERS = [
   { order_id: 1001, order_date: '2026-04-10', status: 'PENDING', total_amount: 4798, user: 'John Doe', address: '123 MG Road, Mumbai', items: 2 },
