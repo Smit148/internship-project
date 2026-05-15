@@ -6,6 +6,7 @@ import ProductManager from './ProductManager/ProductManager';
 import OrderManager from './OrderManager/OrderManager';
 import UserManager from './UserManager/UserManager';
 import CustomerManager from './CustomerManager/CustomerManager';
+import PaymentManager from './PaymentManager/PaymentManager';
 import './Admin.css';
 
 const AdminDashboard = () => {
@@ -23,6 +24,7 @@ const AdminDashboard = () => {
       case 'orders': return <OrderManager />;
       case 'users': return <UserManager />;
       case 'customers': return <CustomerManager />;
+      case 'payments': return <PaymentManager />;
       default:
         return (
           <div className="admin-overview">
@@ -62,6 +64,7 @@ const AdminDashboard = () => {
           <li><button className={activeTab === 'categories' ? 'active' : ''} onClick={() => setActiveTab('categories')}>📂 Categories</button></li>
           <li><button className={activeTab === 'products' ? 'active' : ''} onClick={() => setActiveTab('products')}>🏷️ Products</button></li>
           <li><button className={activeTab === 'orders' ? 'active' : ''} onClick={() => setActiveTab('orders')}>📦 Orders</button></li>
+          <li><button className={activeTab === 'payments' ? 'active' : ''} onClick={() => setActiveTab('payments')}>💳 Payments</button></li>
         </ul>
       </div>
       <div className="admin-content">

@@ -24,3 +24,15 @@ CREATE TABLE orders (
     status BOOLEAN,
     FOREIGN KEY (customer_id) REFERENCES users(user_id)
 );
+
+-- 3. Create payments table
+CREATE TABLE payments (
+    payment_id INT PRIMARY KEY AUTO_INCREMENT,
+    order_id INT,
+    amount DECIMAL(10,2),
+    payment_method VARCHAR(50),
+    payment_status VARCHAR(50),
+    created_at DATETIME,
+    updated_at DATETIME,
+    FOREIGN KEY (order_id) REFERENCES orders(user_id)
+);
