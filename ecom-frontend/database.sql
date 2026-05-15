@@ -58,3 +58,16 @@ CREATE TABLE wishlists (
     updated_at DATETIME,
     FOREIGN KEY (customer_id) REFERENCES users(user_id)
 );
+
+-- 6. Create shipping table
+CREATE TABLE shipping (
+    shipping_id INT PRIMARY KEY AUTO_INCREMENT,
+    order_id INT,
+    courier_service VARCHAR(100),
+    tracking_number VARCHAR(100),
+    shipping_status VARCHAR(50),
+    shipping_cost DECIMAL(10,2),
+    created_at DATETIME,
+    updated_at DATETIME,
+    FOREIGN KEY (order_id) REFERENCES orders(user_id)
+);

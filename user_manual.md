@@ -69,3 +69,34 @@ This section is for **HR Administrators** responsible for onboarding and managin
 > [!TIP]
 > **Need Help?** 
 > If you experience any `404 Not Found` errors when navigating, please ensure you are logged into an account with the correct permissions (e.g., attempting to access the HR Portal as a standard customer will not work).
+
+---
+
+## 💻 4. Core Management Modules
+
+The platform includes several core management modules accessible to administrators for seamless operations.
+
+### Customer Management Module
+- **Dashboard**: View all registered customers, their contact details, and order counts.
+- **Add/Edit**: Manually add or edit customer details.
+- **Soft Delete**: Deactivate customer accounts without permanently deleting their data, maintaining order history integrity.
+
+### Payment Management Module
+- **Dashboard**: View all transaction history, including payment IDs, order IDs, methods (Card, PayPal, etc.), and status.
+- **Refunds**: Process refunds for cancelled orders directly from the dashboard.
+- **Analytics**: Track total revenue, refunded amounts, and failed transactions.
+
+### Cart Management Module
+- **Dashboard**: Monitor active, abandoned, and converted carts.
+- **Abandonment Analysis**: Track cart abandonment rates to improve checkout conversion.
+- **Management**: Admins can view contents of customer carts and remove items if necessary.
+
+### Wishlist Management Module
+- **Dashboard**: Track popular products that users are saving for later.
+- **Analytics**: View the most wishlisted products and the number of unique customers using the feature.
+- **Management**: Monitor wishlist entries and remove invalid records.
+
+### Shipping Management Module
+- **Dashboard**: Track all shipments across the platform.
+- **Cost Calculation**: View shipping costs applied to orders.
+- **Tracking Updates**: Admins can update courier services, tracking numbers, and delivery statuses (Pending, Shipped, In Transit, Delivered) for any order.
